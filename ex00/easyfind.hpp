@@ -1,42 +1,40 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
+// #include <algorithm>
+
 #include <iostream>
 
-#include <algorithm>
-#include <deque>
-#include <iostream>
-#include <list>
-#include <stdexcept>
-#include <string>
 #include <vector>
+#include <deque>
+#include <list>
 
-template <typename C>
-typename C::iterator easyfind(C* container, int value) {
-  typename C::iterator iter = std::find(std::begin(*container),
-                                        std::end(*container),
-                                        value);
-  if (iter == std::end(*container))
-    throw std::runtime_error(std::string("Value ") +
-          std::to_string(value) +
-          std::string(" is not in C"));
-  return iter;
+// #include <stdexcept>
+// #include <string>
+
+template <typename T>
+typename T::iterator easyfind(T* container, int value)
+{
+	typename T::iterator iter = std::find(std::begin(*container), std::end(*container), value);
+
+	if (iter == std::end(*container))
+		throw std::runtime_error(std::string("Value ") + std::to_string(value) + std::string(" is not in C"));
+	return iter;
 }
-
-/*
 
 class returnError : std::exception
 {
-    virtual const char* what() const throw()
-    {
-        return ("Error!\n");
-    };
+		virtual const char* what() const throw()
+		{
+				return ("Error!\n");
+		};
 };
+/*
 
 template <typename T>
 void easyfind(T& container, int value)
 {
-    return std::find(container.begin(). container.end(), find);
+		return std::find(container.begin(). container.end(), find);
 }
 */
 //T가 int의 컨테이너라고 가정하면 이 함수는 매개변수1에서 매개변수2의 첫번째 발생을 찾아야한다.
