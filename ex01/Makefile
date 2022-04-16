@@ -2,7 +2,7 @@ NAME = ex01
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror
 C98 = -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp Span.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all : $(NAME)
