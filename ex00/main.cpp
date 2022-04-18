@@ -6,7 +6,7 @@
 /*   By: yeju <yeju@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 01:32:02 by yeju              #+#    #+#             */
-/*   Updated: 2022/04/16 01:32:02 by yeju             ###   ########.fr       */
+/*   Updated: 2022/04/18 21:49:52 by yeju             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main()
 {
 	try
 	{
-		std::cout << "test with vector container: " << std::endl;
+		std::cout << "test with vector container & check it is first: " << std::endl;
 
 		std::vector<int> vector(3, 0); //0 0 0
 
@@ -53,27 +53,6 @@ int main()
 		std::deque<int>::iterator iter = easyfind(deque, 2);
 
 		std::cout << *iter << std::endl;
-		
-		//std::cout << deque.size();
-
-		//std::cout << "check next: ";
-		//iter++;
-		//std::cout << "size: " << deque.size() << std::endl;;
-		//std::cout << *iter << ", ";
-		//iter++;
-		//std::cout << "size: " << deque.size() << std::endl;;
-		//std::cout << *iter << std::endl;
-		//iter++;
-		//std::cout << "size: " << deque.size() << std::endl;;
-		//std::cout << *iter << std::endl;
-		//iter++;
-		//std::cout << "size: " << deque.size() << std::endl;;
-		//std::cout << *iter << std::endl;
-		//deque.push_back(8);
-		//std::cout << "size: " << deque.size() << std::endl;;
-		//iter++;
-		//std::cout << *iter << std::endl;
-
 	}
 	catch(const std::exception& e)
 	{

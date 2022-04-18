@@ -1,10 +1,5 @@
 #include "Span.hpp"
 
-/* 뭔지 찾아보기
-- set<int> s(0)과 set<int> s의 차이 (0을 채워넣은것과 아예 빈배열?)
-
-*/
-
 Span::Span(unsigned int N) : _N(N), _set()
 {
 	cantExec = 0;
@@ -19,10 +14,13 @@ Span::~Span()
 {
 }
 
-//Span & Span::operator=(Span const &rhs)
-//{
-//	// 이걸 어케할지 모르겟다~~
-//}
+Span & Span::operator=(Span const &rhs)
+{
+	this->cantExec = rhs.cantExec;
+	this->_N = rhs._N;
+	this->_set = rhs._set;
+	return (*this);
+}
 
 unsigned int Span::getN() const
 {
@@ -55,7 +53,7 @@ void Span::addNumber(int add)
 		cantExec = 1;
 		return ;
 	}
-	_set.insert(add); //insert하면서 자동으로 정렬, 같은숫자 알아서 제외 (하지만 throw로 예외처리를 해줘야한다. 반환값 있는지 확인하기)
+	_set.insert(add);
 }
 
 int Span::shortestSpan() const

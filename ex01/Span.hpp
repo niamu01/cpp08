@@ -21,7 +21,7 @@ public:
 
 	std::set<int>& getSet();
 
-	//Span & operator=(Span const &rhs);
+	Span & operator=(Span const &rhs);
 
 	void addNumber(int add);
 	int shortestSpan() const;

@@ -6,7 +6,7 @@
 /*   By: yeju <yeju@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 01:32:05 by yeju              #+#    #+#             */
-/*   Updated: 2022/04/16 01:32:07 by yeju             ###   ########.fr       */
+/*   Updated: 2022/04/18 21:47:45 by yeju             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #define EASYFIND_HPP
 
 #include <iostream>
-
-#include <algorithm>
-
 #include <deque>
 #include <list>
 #include <vector>
