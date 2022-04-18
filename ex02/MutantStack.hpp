@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeju <yeju@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/18 20:31:08 by yeju              #+#    #+#             */
+/*   Updated: 2022/04/18 20:33:53 by yeju             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MUTANTSTACK_HPP
 #define MUTANTSTACK_HPP
 
@@ -12,25 +24,29 @@ public:
 	{
 	};
 
-	MutantStack(const MutantStack &copy) : std::stack<T>(copy)
+	MutantStack(const MutantStack &rhs) : std::stack<T>(rhs)
 	{
 	};
 
-	~MutantStack() //virtual?
+	~MutantStack()
 	{
 	};
 
-	MutantStack<T> &operator=(const MutantStack<T> &rhs) //MutantStack"<T>"
+	MutantStack<T> &operator=(const MutantStack<T> &rhs)
 	{
 		std::stack<T>::operator=(rhs);
 		return (*this);
 	};
 
-	typedef typename std::stack<T>::container_type::iterator iterator; //iterator선언
+	typedef typename std::stack<T>::container_type::iterator iterator;
+	typedef typename std::stack<T>::container_type::iterator reverse_iterator;
+	typedef typename std::stack<T>::container_type::iterator const_iterator;
+	typedef typename std::stack<T>::container_type::iterator const_reverse_iterator;
 
-	iterator begin() //const_iterator begin() const {...
+
+	iterator begin()
 	{
-		return (std::stack<T>::c.begin()); //c.~~
+		return (std::stack<T>::c.begin());
 	}
 
 	iterator end()
@@ -38,7 +54,37 @@ public:
 		return (std::stack<T>::c.end());
 	}
 
-	//const_begin, const_end, rbegin, rend, const_rbegin, const_rend도 만들어야 하는지?
+
+	reverse_iterator rbegin()
+	{
+		return (std::stack<T>::c.rbegin());
+	}
+
+	reverse_iterator rend()
+	{
+		return (std::stack<T>::c.rend());
+	}
+
+
+	const_iterator cbegin() const
+	{
+		return (std::stack<T>::c.begin());
+	}
+	const_iterator cend() const
+	{
+		return (std::stack<T>::c.end());
+	}
+
+
+	const_reverse_iterator rbegin() const
+	{
+		return (std::stack<T>::c.rbegin());
+	}
+
+	const_reverse_iterator rend() const
+	{
+		return (std::stack<T>::c.rend());
+	}
 };
 
 #endif

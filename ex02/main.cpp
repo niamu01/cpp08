@@ -1,87 +1,100 @@
-#include <iostream>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeju <yeju@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/18 20:31:01 by yeju              #+#    #+#             */
+/*   Updated: 2022/04/18 20:34:06 by yeju             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "MutantStack.hpp"
 
 int main()
 {
+	std::cout << "-----TEST 1-----" << std::endl;
+	
+	MutantStack<int> stackA;
+	
+	stackA.push(1);
+	stackA.push(2);
+	stackA.pop();
+	stackA.push(3);
+	stackA.push(4);
+	stackA.push(5);
+
+	std::cout << "stackA: ";
+	MutantStack<int>::iterator iter;
+	for(iter=stackA.begin(); iter!=stackA.end(); iter++)
+		std::cout << *iter << ' ';
+	std::cout << std::endl;
+
+	std::cout << "Last Arrival Number: " << stackA.top() << " / StackA Size: " << stackA.size() << std::endl;
+
+	std::cout << "-----TEST 2-----" << std::endl;
+	MutantStack<int> stackB(stackA);
+
+	stackB.pop();
+	stackB.push(42);
+
+	std::cout << "stackB: ";
+	for(iter=stackB.begin(); iter!=stackB.end(); iter++)
+		std::cout << *iter << ' ';
+	std::cout << std::endl;
+
+	std::cout << "Last Arrival Number: " << stackB.top() << " / stackB Size: " << stackB.size() << std::endl;
+
+	std::cout << "-----TEST 3-----" << std::endl;
+
+	stackA.pop();
+	stackA.push(0);
+
+	MutantStack<int> stackC;
+	stackC = stackA;
+
+	stackA.pop();
+	stackA.push(999);
+
+	std::cout << "stackC: ";
+	for(iter=stackC.begin(); iter!=stackC.end(); iter++)
+		std::cout << *iter << ' ';
+	std::cout << std::endl;
+
+	std::cout << "stackA: ";
+	for(iter=stackA.begin(); iter!=stackA.end(); iter++)
+		std::cout << *iter << ' ';
+	std::cout << std::endl;
+
+	std::cout << "Last Arrival Number: " << stackC.top() << " / stackC Size: " << stackC.size() << std::endl;
+
+	std::cout << "-----SUBJECT TESTCASE-----";
+
+	MutantStack<int> mstack;
+
+	mstack.push(5);
+	mstack.push(17);
+	std::cout << mstack.top() << std::endl;
+
+	mstack.pop();
+	std::cout << mstack.size() << std::endl;
+
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	mstack.push(0);
+
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+
+	++it;
+	--it;
+
+	while (it != ite)
 	{
-		// Test 1
-		std::cout << "----- MUTANTSTACK POP / PUSH PROPERTIES -----\n";
-		
-		MutantStack<int> mstack;
-		
-		mstack.push(1);
-		mstack.push(2);
-		mstack.pop();
-		mstack.push(3);
-		mstack.push(4);
-		mstack.push(5);
-		mstack.push(6);
-
-		std::cout << "Stack last is: " << mstack.top() << " and stack size is: " << mstack.size() << "\n";
-
-		// Test 2
-		std::cout << "\n----- CREATING A MUTANTSTACK WITH COPY CONSTRUCTOR ------\n";
-		MutantStack<int> mstack2(mstack);
-
-		// Modifying the object that was use for copy, the new one created must now differ
-		mstack.pop();
-		mstack.push(999);
-
-		std::cout << "Stack last is: " << mstack2.top() << " and stack size is: " << mstack2.size() << "\n";
-
-
-		// Test 3
-		std::cout << "\n----- CREATING A MUTANTSTACK WITH COPY CONSTRUCTOR ------\n";
-
-		// Restoring basic configuration the mstack object
-		mstack.pop();
-		mstack.push(0);
-
-		MutantStack<int> mstack3;
-		mstack3 = mstack;
-
-		// Modifying the object that was use for assignment, the new one created must now differ
-		mstack.pop();
-		mstack.push(999);
-
-		std::cout << "Stack last is: " << mstack3.top() << " and stack size is: " << mstack3.size() << "\n";
-	}
-
-	{
-		std::cout << "\n----- TESTS FROM SUBJECT -----\n";
-		
-		MutantStack<int> mstack;
-		
-		mstack.push(5);
-		mstack.push(17);
-		
-		std::cout << "top num is " << mstack.top() << std::endl;
-		mstack.pop();
-		std::cout << "after pop the size is " << mstack.size() << std::endl;
-		mstack.pop();
-		std::cout << "clear stack" << std::endl;
-		mstack.push(3);
-		mstack.push(5);
-		mstack.push(7);
-		mstack.push(9);
-		
-		// iterator is a typedef
-		MutantStack<int>::iterator it = mstack.begin();
-		MutantStack<int>::iterator ite = mstack.end();
-		
-		// Bidirectional iterator
+		std::cout << *it << std::endl;
 		++it;
-		--it;
-		
-		// Printing the stack using iterators
-		while (it != ite)
-		{
-			std::cout << *it << std::endl;
-			++it;
-		}
-		std::stack<int> s(mstack);
 	}
-
-	return (0);
+	return 0;
 }
