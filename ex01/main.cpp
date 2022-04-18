@@ -2,26 +2,17 @@
 
 int main()
 {
-
 	std::cout << "-----TEST 1-----" << std::endl;
-	Span span(10000);
-	
-	// Functor
-	FillMultiSet func(0);
-	
-	// Inserting in the multiset x numbers using a functor
-	std::generate_n(std::inserter(span.getMultisetInt(), span.getMultisetInt().begin()), span.getSize(), func);
+	Span spa = Span(10000);
 
-	std::cout << "Printing first 10 numbers: ";
-	
-	// Using a pair so we can check if we don't go futher than the end of the set when printing first 10 elements
-	for (std::pair<int, std::multiset<int>::iterator> i(0, span.getMultisetInt().begin());
-			i.first < 10 && i.second != span.getMultisetInt().end(); i.first++, i.second++)
-		std::cout << *i.second << " ";
-		
-	std::cout << "\nLongest: " << span.longestSpan() << ", shortest: " << span.shortestSpan() << "\n";
+	for (int i = 1; i < 10000; i++)
+	{
+		spa.addNumber(i);
+	}
+	std::cout << spa.shortestSpan() << std::endl;
+	std::cout << spa.longestSpan() << std::endl;
 
-	std::cout << "-----SUBJECT TESTCASE-----";
+	std::cout << "-----SUBJECT TESTCASE-----" << std::endl;
 
 	Span sp = Span(5);
 	sp.addNumber(6);
@@ -31,6 +22,7 @@ int main()
 	sp.addNumber(11);
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
+
 	return 0;
 }
 
