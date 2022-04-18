@@ -5,13 +5,14 @@
 
 */
 
-
 Span::Span(unsigned int N) : _N(N), _set()
 {
+	cantExec = 0;
 }
 
 Span::Span(Span const &rhs) : _N(rhs._N), _set(rhs._set)
 {
+	cantExec = rhs.cantExec;
 }
 
 Span::~Span()
@@ -35,34 +36,51 @@ std::set<int>& Span::getSet()
 
 void Span::addNumber(int add)
 {
-	if (_set.size() == _N)
-		throw std::exception();
+	try
+	{
+		if (_set.size() == _N)
+			throw Span::overFlowError();
+		if (*_set.find(add) == add)
+			throw Span::sameNumError();
+	}
+	catch (const Span::overFlowError &_throw)
+	{
+		std::cout << _throw.what() << std::endl;
+		cantExec = 1;
+		return ;
+	}
+	catch (const Span::sameNumError &_throw)
+	{
+		std::cout << _throw.what() << std::endl;
+		cantExec = 1;
+		return ;
+	}
 	_set.insert(add); //insert하면서 자동으로 정렬, 같은숫자 알아서 제외 (하지만 throw로 예외처리를 해줘야한다. 반환값 있는지 확인하기)
 }
 
-int Span::shortestSpan() const //들어있는 숫자들 중 이웃하는 숫자의 차이를 구하고 그 값이 가장 작은것
+int Span::shortestSpan() const
 {
 	int ret;
 
-	if (_set.size() <= 1) //저장된 숫자가 없거나 하나만 있으면 throw
+	if (cantExec == 1)
+		return 0;
+	if (_set.size() <= 1)
 		throw std::exception();
 	
-	ret = *(++_set.begin()) - *(_set.begin()); //포인터로 움직임
+	ret = *(++_set.begin()) - *(_set.begin());
 	
-	//for (unsigned int i = 0; i < _set.size() - 1; i++)
-	//{
-		//if (ret > _set[i + 1] - _set[i])
-		//	ret = _set[i + 1] - _set[i];
-	for (std::pair<std::multiset<int>::iterator, std::multiset<int>::iterator> i(_set.begin(), ++_set.begin()); i.second != _set.end(); i.first++, i.second++)	
+	for (std::pair<std::set<int>::iterator, std::set<int>::iterator> i(_set.begin(), ++_set.begin()); i.second != _set.end(); i.first++, i.second++)	
 		if (ret > *i.second - *i.first)
-			ret = *i.second - *i.first; //@pair을 사용해 for문 완성
+			ret = *i.second - *i.first;
 	return (ret);
 }
 
-int Span::longestSpan() const //들어있는 숫자들 중 가장 작은거 & 큰거의 차이
+int Span::longestSpan() const
 {
 	int ret;
 
+	if (cantExec == 1)
+		return 0;
 	if (_set.size() <= 1)
 		throw std::exception();
 	ret = (*(--_set.end()) - *(_set.begin()));
